@@ -1,7 +1,7 @@
 local module = {}
 
-module.LP = game.Players.LocalPlayer
-module.Char = LP.Character
+LP = game.Players.LocalPlayer
+Char = LP.Character
 
 function module.Player(PartialName)
     local foundPlayer
