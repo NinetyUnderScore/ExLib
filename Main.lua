@@ -1,7 +1,9 @@
-LP = game.Players.LocalPlayer
-Char = LP.Character
+local module = {}
 
-function Player(PartialName)
+module.LP = game.Players.LocalPlayer
+module.Char = LP.Character
+
+function module.Player(PartialName)
     local foundPlayer
     local Players = game.Players:GetChildren()
     for i = 1, #Players do
@@ -14,11 +16,11 @@ function Player(PartialName)
     return foundPlayer
 end
 
-function Character(PartialName)
+function module.Character(PartialName)
     return Player(PartialName).Character
 end
 
-function LaunchUA(Vec3, Force, Loops)
+function module.LaunchUA(Vec3, Force, Loops)
     for count = 0, Loops do
         for i,v in pairs(workspace:GetDescendants()) do
             if v:IsA("BasePart") then
@@ -31,3 +33,5 @@ function LaunchUA(Vec3, Force, Loops)
         wait()
     end
 end
+
+return module
