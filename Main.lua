@@ -1,5 +1,6 @@
 LP = game.Players.LocalPlayer
 Char = LP.Character
+Cc = workspace.CurrentCamera
 
 function Player(PartialName)
     for i,v in pairs(game.Players:GetPlayers()) do
