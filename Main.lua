@@ -17,7 +17,7 @@ end
 function GetClosestPlayer(Vec3)
     Closest = {math.huge,nil}
     for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-        if v.Character ~= nil then
+        if v.Character ~= nil and v ~= LP then
             if v.Character:FindFirstChild("Head") ~= nil then
                 mag = (v.Character.Head.Position - Vec3).Magnitude
                 if mag < Closest[1] then
