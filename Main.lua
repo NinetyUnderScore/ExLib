@@ -14,6 +14,21 @@ function Character(PartialName)
     return Player(PartialName).Character
 end
 
+function GetClosestPlayer(Vec3)
+    Closest = {math.huge,nil}
+    for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+        if v.Character ~= nil then
+            if v.Character:FindFirstChild("Head") ~= nil then
+                mag = (v.Character.Head.Position - Vec3).Magnitude
+                if mag < Closest[1] then
+                    Closest = {mag,v.Character}
+                end
+            end
+        end
+    end
+    return Closest[2]
+end
+
 function GetUA()
     UA = {}
     for i,v in pairs(workspace:GetDescendants()) do
