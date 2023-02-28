@@ -2,30 +2,33 @@ LP = game.Players.LocalPlayer
 Char = LP.Character
 
 function Player(PartialName)
-    local foundPlayer
-    local Players = game.Players:GetChildren()
-    for i = 1, #Players do
-    	local CurrentPlayer = Players[i]
-    	if string.lower(CurrentPlayer.Name):sub(1, #PartialName) == string.lower(PartialName) then
-    		foundPlayer = CurrentPlayer
-    		break
+    for i,v in pairs(game.Players:GetPlayers()) do
+    	if string.lower(v.DisplayName):sub(1, #PartialName) == string.lower(PartialName) then
+    		return v
     	end
     end
-    return foundPlayer
 end
 
 function Character(PartialName)
     return Player(PartialName).Character
 end
 
+function GetUA()
+    UA = {}
+    for i,v in pairs(workspace:GetDescendants()) do
+        if v:IsA("BasePart") or v.ClassName == "MeshPart" then
+           if isnetworkowner(v) and v.Parent ~= Char and v.Parent.Parent ~= Char then
+                table.insert(UA, v)
+            end
+        end
+    end
+    return UA
+end
+
 function LaunchUA(Vec3, Force, Loops)
     for count = 0, Loops do
-        for i,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("BasePart") then
-                if isnetworkowner(v) and v.Parent ~=  Char and v.Parent.Parent ~= Char then
-                    v.Velocity = ((Vec3 - v.Position).Unit) * Vector3.new(Force,Force,Force)
-                end
-            end
+        for i,v in pairs(GetUA()) do
+            v.Velocity = ((Vec3 - v.Position).Unit) * Force
         end
         wait()
     end
@@ -33,12 +36,8 @@ end
 
 function VelocityUA(Vec3, Loops)
     for count = 0, Loops do
-        for i,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("BasePart") then
-                if isnetworkowner(v) and v.Parent ~=  Char and v.Parent.Parent ~= Char then
-                    v.Velocity = Vec3
-                end
-            end
+        for i,v in pairs(GetUA()) do
+            v.Velocity = Vec3
         end
         wait()
     end
