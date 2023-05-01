@@ -649,6 +649,7 @@ if game:GetService("CoreGui"):FindFirstChild("ScriptManager") == nil then
 		_SMConnect(obj.Keys.Changed:Connect(_SMUpdate))
 		local function _SMKillScript()
 			obj.Kill:Invoke()
+			gui:Destroy()
 		end
 		_SMConnect(gui.Stop.MouseButton1Click:Connect(_SMKillScript))
 		gui.Visible = true
