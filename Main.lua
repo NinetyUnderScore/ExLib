@@ -549,6 +549,7 @@ end
 if game:GetService("CoreGui"):FindFirstChild("ScriptManager") == nil then
 	wait(0.1)
 	_SM = SummonSM()
+	wait(0.1)
 	_SMScripts = Instance.new("Folder")
 	_SMScripts.Parent = game:GetService"CoreGui"
 	_SMScripts.Name = "Scripts"
@@ -622,7 +623,9 @@ if game:GetService("CoreGui"):FindFirstChild("ScriptManager") == nil then
 			v:Disconnect()
 		end
 		_SM:Destroy()
+		_SMScripts:Destroy()
 	end
+	_SMConnect(_SM.Manager.ScrollingFrame.Self.Stop.MouseButton1Click:Connect(_SMKill))
 
 	
 
