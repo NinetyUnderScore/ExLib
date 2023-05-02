@@ -623,7 +623,7 @@ if game:GetService("CoreGui"):FindFirstChild("ScriptManager") == nil then
 			v:Disconnect()
 		end
 		_SM:Destroy()
-		for i,v in pairs(_SMScripts:GetChildren) do
+		for i,v in pairs(_SMScripts:GetChildren()) do
 			if v:FindFirstChild("Kill") ~= nil then
 				v.Kill:Invoke()
 			end
